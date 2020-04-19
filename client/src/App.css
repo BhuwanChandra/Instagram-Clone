@@ -31,3 +31,20 @@ nav ul a {
     border-bottom: 1px solid #2990f1 !important;
     box-shadow: 0 1px 0 0 #2990f1 !important;
 }
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.gallery-item {
+    width: 30%;
+    height: 30%;
+}
+
+.home-card {
+    max-width: 550px;
+    margin: 15px auto;
+    height: max-content;
+}
