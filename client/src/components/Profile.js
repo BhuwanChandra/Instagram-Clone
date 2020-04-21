@@ -46,8 +46,8 @@ const [mypics, setPics] = useState([]);
         </div>
         <div className="gallery">
         {
-            mypics.map(item => <div className="img-item">
-                <img key={item._id} className="gallery-item" src={item.photo} alt={item.title}/>
+            mypics.map(item => <div key={item._id} className="img-item">
+                <img className="gallery-item" src={item.photo} alt={item.title}/>
             </div>
             )
         }
