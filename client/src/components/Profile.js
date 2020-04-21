@@ -51,9 +51,6 @@ const [mypics, setPics] = useState([]);
             </div>
             )
         }
-            <div className="img-item">
-                <img className="gallery-item" src="https://images.unsplash.com/photo-1484186304838-0bf1a8cff81c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
-            </div>
         </div>
     </div>
   );
