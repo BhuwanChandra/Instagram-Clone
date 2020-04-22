@@ -218,7 +218,7 @@ function Home() {
         </div>
       ) : (
         <center>
-          <h2>Loading...</h2>
+          <h2>loading...</h2>
         </center>
       )}
     </>

@@ -36,7 +36,8 @@ router.put("/follow", requireLogin, (req, res) => {
             $push: {following: req.body.followId}
         }, {
             new: true
-        }).then(result => {
+        }).select("-password")
+        .then(result => {
             res.status(200).json(result);
         }).catch(err => res.status(422).json({error: err}));
     })
@@ -55,7 +56,8 @@ router.put("/unfollow", requireLogin, (req, res) => {
             $pull: {following: req.body.followId}
         }, {
             new: true
-        }).then(result => {
+        }).select("-password")
+        .then(result => {
             res.status(200).json(result);
         }).catch(err => res.status(422).json({error: err}));
     })

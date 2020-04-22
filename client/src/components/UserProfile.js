@@ -16,7 +16,7 @@ function UserProfile() {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setProfile(res);
       })
       .catch(err => console.log(err));
@@ -34,7 +34,43 @@ function UserProfile() {
           })
       }).then(res => res.json())
       .then(result => {
-          console.log(result)
+          dispatch({type: "UPDATE", payload: { following: result.following, followers: result.followers }});
+          localStorage.setItem("user", JSON.stringify(result));
+          setProfile((prevState) => {
+              return {
+                  ...prevState,
+                  user: {
+                      ...prevState.user,
+                      followers: [...prevState.user.followers, result._id]
+                  }
+              }
+          })
+      }).catch(err => console.log(err));
+  }
+
+  const unfollowUser = () => {
+      fetch("/unfollow",{
+          method: "put",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("jwt")
+          },
+          body: JSON.stringify({
+              unfollowId: userId
+          })
+      }).then(res => res.json())
+      .then(result => {
+          dispatch({type: "UPDATE", payload: { following: result.following, followers: result.followers }});
+          localStorage.setItem("user", JSON.stringify(result));
+          setProfile((prevState) => {
+              return {
+                  ...prevState,
+                  user: {
+                      ...prevState.user,
+                      followers: [...prevState.user.followers.filter(e => e !== result._id)]
+                  }
+              }
+          })
       }).catch(err => console.log(err));
   }
 
@@ -70,7 +106,11 @@ function UserProfile() {
                 <h6> {userProfile.user.followers.length} followers</h6>
                 <h6> {userProfile.user.following.length} following</h6>
               </div>
-              <button className="btn" onClick={followUser}> follow </button>
+              {
+                userProfile.user.followers.includes(state._id) ?
+                <button className="btn" onClick={unfollowUser}> Unfollow </button>
+                : <button className="btn" onClick={followUser}> follow </button>
+              }
             </div>
           </div>
           <div className="gallery">
@@ -87,7 +127,7 @@ function UserProfile() {
         </div>
       ) : (
         <center>
-          <h2>Loading...</h2>
+          <h2>loading...</h2>
         </center>
       )}
     </>

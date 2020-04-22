@@ -5,6 +5,7 @@ import { UserContext } from "../App";
 function Profile() {
   const { state, dispatch } = useContext(UserContext);
   const [mypics, setPics] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("/mypost", {
       headers: {
@@ -14,13 +15,14 @@ function Profile() {
       .then(res => res.json())
       .then(res => {
         setPics(res.mypost);
+        setLoading(false);
       })
       .catch(err => console.log(err));
   }, []);
 
   return (
     <>
-      {mypics.length ? (
+      { !loading ? (
         <div style={{ maxWidth: "600px", margin: "0px auto" }}>
           <div
             style={{
@@ -47,8 +49,8 @@ function Profile() {
                 }}
               >
                 <h6>{mypics.length} posts</h6>
-                <h6>40 followers</h6>
-                <h6>40 following</h6>
+                <h6>{state ? state.followers.length: 0} followers</h6>
+                <h6>{state ? state.following.length: 0} following</h6>
               </div>
             </div>
           </div>
@@ -64,9 +66,9 @@ function Profile() {
             ))}
           </div>
         </div>
-      ) : (
+       ) : (
         <center>
-          <h2>Loading...</h2>
+          <h2>loading...</h2>
         </center>
       )}
     </>
