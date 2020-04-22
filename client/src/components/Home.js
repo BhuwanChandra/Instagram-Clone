@@ -86,6 +86,31 @@ function Home() {
       .catch(err => console.log(err));
   };
 
+  const deleteComment = (commentId, text, postId) => {
+    fetch("/deletecomment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+      },
+      body: JSON.stringify({
+        postId,
+        commentId,
+        text
+      })
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log(result);
+        const newData = data.map(item => {
+          if (item._id === result._id) return result;
+          else return item;
+        });
+        setData(newData);
+      })
+      .catch(err => console.log(err));
+  };
+
   const deletePost = postId => {
     fetch(`/deletepost/${postId}`, {
       method: "delete",
@@ -150,7 +175,19 @@ function Home() {
               {item.comments.map(record => {
                 return (
                   <h6 key={record._id}>
-                    <strong>{record.postedBy.name}</strong> {record.text}
+                    <strong>{record.postedBy.name + " "}</strong> 
+                    {record.text}
+                    {record.postedBy._id === state._id ? (
+                      <i
+                        onClick={() => deleteComment(record._id, record.text, item._id)}
+                        style={{ color: "#e53935", float: "right" }}
+                        className="material-icons"
+                      >
+                        delete
+                      </i>
+                    ) : (
+                        ""
+                      )}
                   </h6>
                 );
               })}
