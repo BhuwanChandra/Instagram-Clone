@@ -21,7 +21,9 @@ router.get("/getsubpost", requireLogin, (req, res) => {
     .populate("postedBy", "_id name")
     .populate("comments.postedBy", "_id name")
     .then(posts => {
-      res.json({ posts });
+      if(posts)
+      res.status(200).json({ posts });
+      else res.json({message: "No posts available"})
     })
     .catch(err => console.log(err));
 });

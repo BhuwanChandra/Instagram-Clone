@@ -5,9 +5,10 @@ import { UserContext } from "../App";
 function Home() {
   const { state, dispatch } = useContext(UserContext);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/allpost", {
+    fetch("/getsubpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt")
       }
@@ -15,6 +16,7 @@ function Home() {
       .then(res => res.json())
       .then(res => {
         setData(res.posts);
+        setLoading(false);
       })
       .catch(err => console.log(err));
   }, []);
@@ -132,7 +134,7 @@ function Home() {
 
   return (
     <>
-      {data.length ? (
+      { !loading ? (
         <div className="home">
           {data.map(item => {
             return (
