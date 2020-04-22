@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import UserProfile from './components/UserProfile';
 import CreatePost from './components/CreatePost';
+import Explore from './components/Explore';
 import { reducer, InitialState } from './reducers/userReducer';
 
 
@@ -43,6 +44,9 @@ const Routing = () => {
       </Route>
       <Route path="/create">
         <CreatePost />
+      </Route>
+      <Route path="/explore">
+        <Explore />
       </Route>
     </Switch>
   );
