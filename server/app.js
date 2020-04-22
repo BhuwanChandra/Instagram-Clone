@@ -23,6 +23,7 @@ app.use(express.json());
 
 app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
+app.use(require("./routes/user"));
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT} `);

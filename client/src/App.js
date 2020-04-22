@@ -6,6 +6,7 @@ import Home from './components/Home';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import UserProfile from './components/UserProfile';
 import CreatePost from './components/CreatePost';
 import { reducer, InitialState } from './reducers/userReducer';
 
@@ -34,8 +35,11 @@ const Routing = () => {
       <Route path="/login">
         <Login />
       </Route>
-      <Route path="/profile">
+      <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route path="/profile/:userId">
+        <UserProfile />
       </Route>
       <Route path="/create">
         <CreatePost />
