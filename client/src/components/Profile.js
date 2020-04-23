@@ -3,7 +3,7 @@ import "../App.css";
 import { UserContext } from "../App";
 
 function Profile() {
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
   const [mypics, setPics] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -22,7 +22,7 @@ function Profile() {
 
   return (
     <>
-      { !loading ? (
+      {!loading ? (
         <div style={{ maxWidth: "600px", margin: "0px auto" }}>
           <div
             style={{
@@ -35,7 +35,8 @@ function Profile() {
             <div>
               <img
                 style={{ width: "160px", height: "160px", borderRadius: "50%" }}
-                src="https://images.unsplash.com/photo-1484186304838-0bf1a8cff81c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                src={state ? state.pic : ""}
+                alt={state ? state.name : ""}
               />
             </div>
             <div>
@@ -49,8 +50,8 @@ function Profile() {
                 }}
               >
                 <h6>{mypics.length} posts</h6>
-                <h6>{state ? state.followers.length: 0} followers</h6>
-                <h6>{state ? state.following.length: 0} following</h6>
+                <h6>{state ? state.followers.length : 0} followers</h6>
+                <h6>{state ? state.following.length : 0} following</h6>
               </div>
             </div>
           </div>
@@ -66,7 +67,7 @@ function Profile() {
             ))}
           </div>
         </div>
-       ) : (
+      ) : (
         <center>
           <h2>loading...</h2>
         </center>

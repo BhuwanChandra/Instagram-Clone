@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useReducer, useContext} from 'react';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/Partials/Navbar';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -11,12 +11,11 @@ import CreatePost from './components/CreatePost';
 import Explore from './components/Explore';
 import { reducer, InitialState } from './reducers/userReducer';
 
-
 export const UserContext = createContext();
 
 const Routing = () => {
   const history = useHistory();
-  const {state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if(user){
