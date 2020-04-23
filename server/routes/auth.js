@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, pic } = req.body;
   if (!email || !name || !password) {
     return res.status(422).json({
       error: "please add all the fields."
@@ -31,7 +31,8 @@ router.post("/signup", (req, res) => {
           const user = new User({
             email,
             password: hashPassword,
-            name
+            name,
+            pic
           });
           user
             .save()
@@ -62,11 +63,11 @@ router.post("/signin", (req, res) => {
         .then(doMatch => {
           if (doMatch) {
             const token = jwt.sign({ _id: savedUser._id }, JWT_SECRET);
-            const { _id, name, email, followers, following } = savedUser;
+            const { _id, name, email, pic, followers, following } = savedUser;
             res.json({
               message: "Successfully signed in!!!",
               token,
-              user: {_id, name, email, followers, following}
+              user: {_id, name, email, pic, followers, following}
             });
           } else {
             return res
