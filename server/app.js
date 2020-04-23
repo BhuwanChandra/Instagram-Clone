@@ -11,12 +11,10 @@ const Post = require("./models/post");
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).catch(err => console.log(err));
+
 mongoose.connection.on("connected", () => {
   console.log("connected to database!!!");
-});
-mongoose.connection.on("error", error => {
-  console.log("error connecting: ", error.message);
 });
 
 app.use(express.json());
