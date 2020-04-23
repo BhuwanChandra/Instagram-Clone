@@ -6,8 +6,8 @@ function CreatePost() {
   const history = useHistory();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  const [image, setImage] = useState(undefined);
+  const [url, setUrl] = useState(undefined);
 
   useEffect(() => {
     if (url)
@@ -76,6 +76,11 @@ function CreatePost() {
         onChange={e => setBody(e.target.value)}
         placeholder="body"
       />
+      { image ?
+        <div className="card-image" style={{marginTop: "15px"}}>
+          <img src={URL.createObjectURL(image)} alt="image preview" />
+        </div> : ''
+      }
       <div className="file-field input-field">
         <div className="btn #42a5f5 blue darken-1">
           <span>Upload Image</span>
