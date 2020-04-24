@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 function Post({ props }) {
@@ -11,6 +11,9 @@ function Post({ props }) {
     deletePost,
     state
   } = props;
+
+  const [comment, setComment] = useState('');
+
   return (
     <div className="card home-card">
       <h5>
@@ -83,9 +86,10 @@ function Post({ props }) {
           onSubmit={e => {
             e.preventDefault();
             makeComment(e.target[0].value, item._id);
+            setComment('');
           }}
         >
-          <input type="text" placeholder="add a comment" />
+          <input value={comment} onChange={e => setComment(e.target.value)} type="text" placeholder="add a comment..." />
         </form>
       </div>
     </div>
