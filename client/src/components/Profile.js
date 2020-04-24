@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Link } from 'react-router-dom';
 import "../App.css";
 import { UserContext } from "../App";
 
@@ -28,16 +29,20 @@ function Profile() {
             style={{
               display: "flex",
               justifyContent: "space-around",
-              margin: "18px 0px",
-              borderBottom: "1px solid grey"
+              margin: "18px 0px"
             }}
           >
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
               <img
-                style={{ width: "160px", height: "160px", borderRadius: "50%" }}
+                style={{ width: "160px", height: "160px", borderRadius: "50%", marginBottom: '10px' }}
                 src={state ? state.pic : ""}
                 alt={state ? state.name : ""}
               />
+
+              <Link
+                to="/profile/edit"
+                className="btn btn-small #42a5f5 blue darken-1"
+              >Edit Profile</Link>
             </div>
             <div>
               <h4>{state ? state.name : ""}</h4>
