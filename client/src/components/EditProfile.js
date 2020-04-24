@@ -32,6 +32,7 @@ function EditProfile() {
     fetch("/editprofile", {
       method: "post",
       headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -46,10 +47,16 @@ function EditProfile() {
         if (data.error)
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         else {
-          dispatch({ type: "UPDATEPROFILE", payload: { name: data.name, email: data.email, pic: data.pic } });
+          dispatch({
+            type: "UPDATEPROFILE",
+            payload: { name: data.name, email: data.email, pic: data.pic }
+          });
           localStorage.setItem("user", JSON.stringify(data));
-          M.toast({ html: "Updated Successfully", classes: "#43a047 green darken-1" });
-          history.push('/profile');
+          M.toast({
+            html: "Updated Successfully",
+            classes: "#43a047 green darken-1"
+          });
+          history.push("/profile");
         }
       })
       .catch(err => console.log(err));

@@ -56,7 +56,7 @@ function CreatePost() {
 
   return (
     <div
-      className="card input-field"
+      className="card input-field create-post"
       style={{
         margin: "30px auto",
         maxWidth: "550px",

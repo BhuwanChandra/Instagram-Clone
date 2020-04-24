@@ -88,6 +88,11 @@ function Signup() {
           placeholder="password"
           onChange={e => setPassword(e.target.value)}
         />
+        {image ?
+          <div className="card-image" style={{ marginTop: "15px" }}>
+            <img src={URL.createObjectURL(image)} alt="image preview" />
+          </div> : ''
+        }
         <div className="file-field input-field">
           <div className="btn #42a5f5 blue darken-1">
             <span>Upload pic</span>

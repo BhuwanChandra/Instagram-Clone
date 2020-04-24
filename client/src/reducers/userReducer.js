@@ -15,5 +15,13 @@ export const reducer = (state, action) => {
             following: action.payload.following
         };
     }
+    if(action.type === "UPDATEPROFILE"){
+        return {
+            ...state,
+            name: action.payload.name,
+            email: action.payload.email,
+            pic: action.payload.pic
+        };
+    }
     return state;
 }
