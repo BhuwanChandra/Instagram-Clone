@@ -37,16 +37,30 @@ function Navbar() {
     }
   }
   return (
-    <nav>
-      <div className="nav-wrapper white">
-        <Link to={state ? "/" : "/login"} className="brand-logo">
+    <>
+      <nav>
+        <div className="nav-wrapper white">
+          <Link to={state ? "/" : "/login"} className="brand-logo">
+            Instagram
+          </Link>
+          <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+            <i className="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            {renderList()}
+          </ul>
+        </div>
+      </nav>
+      <ul className="sidenav sidenav-close" id="mobile-demo">
+        <li style={{paddingTop: '8px'}}>
+          <Link to={state ? "/" : "/login"} className="brand-logo">
           Instagram
-        </Link>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-          {renderList()}
-        </ul>
-      </div>
-    </nav>
+          </Link>
+        </li>
+        <li><div class="divider"></div></li>
+        {renderList()}
+      </ul>
+    </>
   );
 }
 

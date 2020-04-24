@@ -17,6 +17,10 @@ nav ul a {
     margin-right: 10px;
 }
 
+.sidenav li button {
+    margin-left: 2rem;
+}
+
 .brand-logo {
     font-family: 'Grand Hotel', cursive;
     margin-left: 30px;

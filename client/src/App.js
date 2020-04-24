@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useReducer, useContext} from 'react';
 import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
 import './App.css';
+import { reducer, InitialState } from './reducers/userReducer';
 import Navbar from './components/Partials/Navbar';
 import Home from './components/Home';
 import Signup from './components/Signup';
@@ -9,7 +10,7 @@ import Profile from './components/Profile';
 import UserProfile from './components/UserProfile';
 import CreatePost from './components/CreatePost';
 import Explore from './components/Explore';
-import { reducer, InitialState } from './reducers/userReducer';
+import EditProfile from './components/EditProfile';
 
 export const UserContext = createContext();
 
@@ -37,6 +38,9 @@ const Routing = () => {
       </Route>
       <Route exact path="/profile">
         <Profile />
+      </Route>
+      <Route exact path="/profile/edit">
+        <EditProfile />
       </Route>
       <Route path="/profile/:userId">
         <UserProfile />
