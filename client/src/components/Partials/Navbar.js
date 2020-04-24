@@ -57,7 +57,7 @@ function Navbar() {
           Instagram
           </Link>
         </li>
-        <li><div class="divider"></div></li>
+        <li><div className="divider"></div></li>
         {renderList()}
       </ul>
     </>

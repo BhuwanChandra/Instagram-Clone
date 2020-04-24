@@ -8,6 +8,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = false;
     fetch("/getsubpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt")
@@ -15,10 +16,15 @@ function Home() {
     })
       .then(res => res.json())
       .then(res => {
-        setData(res.posts);
-        setLoading(false);
+        if(!isMounted){
+          setData(res.posts);
+          setLoading(false);
+        }
       })
       .catch(err => console.log(err));
+      return () => {
+        isMounted = true;
+      }
   }, []);
 
   const likePost = id => {

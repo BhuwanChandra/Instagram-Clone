@@ -7,6 +7,7 @@ function Explore() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    let isMounted = false;
     fetch("/allpost", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt")
@@ -14,9 +15,13 @@ function Explore() {
     })
       .then(res => res.json())
       .then(res => {
+        if(!isMounted)
         setData(res.posts);
       })
       .catch(err => console.log(err));
+      return() => {
+        isMounted = true;
+      }
   }, []);
 
   const likePost = id => {
