@@ -57,10 +57,12 @@ nav ul a {
 }
 
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 10px;
+    width: 100%;
+    display: grid;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+    grid-template-columns: 33% 33% 33%;
+    padding: 5px;
     padding-top: 10px;
     border-top: 1px solid grey;
 }
@@ -71,10 +73,7 @@ nav ul a {
 }
 
 .img-item {
-    width: 30%;
-    max-height: 150px;
     background-color: #b4cace;
-    margin-bottom: 10px;
 }
 
 .home-card {
@@ -138,6 +137,21 @@ i {
     margin-bottom: 10px;
 }
 
+.info-sec {
+    padding-top: 20px;
+}
+
+.posts-sec-head {
+    border-top: 1px solid #686767;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #686767;
+}
+
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
     .profile-image {
@@ -146,5 +160,8 @@ i {
     }
     .p-btn {
         padding: 0 !important;
+    }
+    .info-sec {
+        padding-top: 0;
     }
 }

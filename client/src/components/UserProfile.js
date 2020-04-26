@@ -24,87 +24,111 @@ function UserProfile() {
   }, []);
 
   const followUser = () => {
-      fetch("/follow",{
-          method: "put",
-          headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("jwt")
-          },
-          body: JSON.stringify({
-              followId: userId
-          })
-      }).then(res => res.json())
+    fetch("/follow", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        followId: userId
+      })
+    })
+      .then(res => res.json())
       .then(result => {
-          dispatch({type: "UPDATE", payload: { following: result.following, followers: result.followers }});
-          localStorage.setItem("user", JSON.stringify(result));
-          setProfile((prevState) => {
-              return {
-                  ...prevState,
-                  user: {
-                      ...prevState.user,
-                      followers: [...prevState.user.followers, result._id]
-                  }
-              }
-          })
-      }).catch(err => console.log(err));
-  }
+        dispatch({
+          type: "UPDATE",
+          payload: { following: result.following, followers: result.followers }
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        setProfile(prevState => {
+          return {
+            ...prevState,
+            user: {
+              ...prevState.user,
+              followers: [...prevState.user.followers, result._id]
+            }
+          };
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   const unfollowUser = () => {
-      fetch("/unfollow",{
-          method: "put",
-          headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + localStorage.getItem("jwt")
-          },
-          body: JSON.stringify({
-              unfollowId: userId
-          })
-      }).then(res => res.json())
+    fetch("/unfollow", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      },
+      body: JSON.stringify({
+        unfollowId: userId
+      })
+    })
+      .then(res => res.json())
       .then(result => {
-          dispatch({type: "UPDATE", payload: { following: result.following, followers: result.followers }});
-          localStorage.setItem("user", JSON.stringify(result));
-          setProfile((prevState) => {
-              return {
-                  ...prevState,
-                  user: {
-                      ...prevState.user,
-                      followers: [...prevState.user.followers.filter(e => e !== result._id)]
-                  }
-              }
-          })
-      }).catch(err => console.log(err));
-  }
+        dispatch({
+          type: "UPDATE",
+          payload: { following: result.following, followers: result.followers }
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        setProfile(prevState => {
+          return {
+            ...prevState,
+            user: {
+              ...prevState.user,
+              followers: [
+                ...prevState.user.followers.filter(e => e !== result._id)
+              ]
+            }
+          };
+        });
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <>
-      { (userProfile.user && userProfile.posts) ?(
+      {userProfile.user && userProfile.posts ? (
         <div style={{ maxWidth: "600px", margin: "0px auto" }}>
           <div
             style={{
               display: "flex",
               justifyContent: "space-evenly",
-              margin: "18px 0px",
+              margin: "18px 0px"
             }}
           >
-            <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <img
                 className="profile-image"
                 src={userProfile.user.pic}
                 alt={userProfile.user.name}
               />
-              {
-                userProfile.user.followers.includes(state._id) ?
-                <button className="btn btn-small #42a5f5 blue darken-1 p-btn" onClick={unfollowUser}> Unfollow </button>
-                : <button className="btn btn-small #42a5f5 blue darken-1 p-btn" onClick={followUser}> follow </button>
-              }
+              {userProfile.user.followers.includes(state._id) ? (
+                <button
+                  className="btn btn-small #42a5f5 blue darken-1 p-btn"
+                  onClick={unfollowUser}
+                >
+                  {" "}
+                  Unfollow{" "}
+                </button>
+              ) : (
+                <button
+                  className="btn btn-small #42a5f5 blue darken-1 p-btn"
+                  onClick={followUser}
+                >
+                  {" "}
+                  follow{" "}
+                </button>
+              )}
             </div>
-            <div>
+            <div className="info-sec">
               <h4>{userProfile.user.name}</h4>
               <h5>{userProfile.user.email}</h5>
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "space-evenly",
                   width: "108%"
                 }}
               >
@@ -112,8 +136,11 @@ function UserProfile() {
                 <h6> {userProfile.user.followers.length} followers</h6>
                 <h6> {userProfile.user.following.length} following</h6>
               </div>
-              
             </div>
+          </div>
+          <div className="posts-sec-head">
+            <i class="material-icons">apps</i>
+            <span>POSTS</span>
           </div>
           <div className="gallery">
             {userProfile.posts.map(item => (
@@ -127,8 +154,9 @@ function UserProfile() {
             ))}
           </div>
         </div>
-      ) : <Loading />
-      }
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }

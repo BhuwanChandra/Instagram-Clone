@@ -45,13 +45,13 @@ function Profile() {
                 className="btn btn-small #42a5f5 blue darken-1 p-btn"
               >Edit Profile</Link>
             </div>
-            <div>
+            <div className="info-sec">
               <h4>{state ? state.name : ""}</h4>
               <h5>{state ? state.email : ""}</h5>
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "space-evenly",
                   width: "108%"
                 }}
               >
@@ -60,6 +60,9 @@ function Profile() {
                 <h6>{state ? state.following.length : 0} following</h6>
               </div>
             </div>
+          </div>
+          <div className="posts-sec-head">
+            <i class="material-icons">apps</i><span>POSTS</span>
           </div>
           <div className="gallery">
             {mypics.map(item => (
