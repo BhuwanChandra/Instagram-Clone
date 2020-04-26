@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Link } from 'react-router-dom';
 import "../App.css";
 import { UserContext } from "../App";
+import Loading from "./Partials/Loading";
 
 function Profile() {
   const { state } = useContext(UserContext);
@@ -28,20 +29,20 @@ function Profile() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-evenly",
               margin: "18px 0px"
             }}
           >
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <img
-                style={{ width: "160px", height: "160px", borderRadius: "50%", marginBottom: '10px' }}
+                className="profile-image"
                 src={state ? state.pic : ""}
                 alt={state ? state.name : ""}
               />
 
               <Link
                 to="/profile/edit"
-                className="btn btn-small #42a5f5 blue darken-1"
+                className="btn btn-small #42a5f5 blue darken-1 p-btn"
               >Edit Profile</Link>
             </div>
             <div>
@@ -72,11 +73,8 @@ function Profile() {
             ))}
           </div>
         </div>
-      ) : (
-        <center>
-          <h2>loading...</h2>
-        </center>
-      )}
+      ) : <Loading />
+      }
     </>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../App";
 import M from 'materialize-css';
+import Loading from "./Partials/Loading";
 
 function EditProfile() {
   const { state, dispatch } = useContext(UserContext);
@@ -11,6 +12,7 @@ function EditProfile() {
     const [email, setEmail] = useState('');
     const [image, setImage] = useState(undefined);
     const [url, setUrl] = useState(undefined);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
       if(state){
@@ -29,6 +31,7 @@ function EditProfile() {
       M.toast({ html: "Invalid Email", classes: "#e53935 red darken-1" });
       return;
     }
+    setLoading(true);
     fetch("/editprofile", {
       method: "post",
       headers: {
@@ -44,6 +47,7 @@ function EditProfile() {
     })
       .then(res => res.json())
       .then(data => {
+        setLoading(false);
         if (data.error)
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         else {
@@ -59,7 +63,10 @@ function EditProfile() {
           history.push("/profile");
         }
       })
-      .catch(err => console.log(err));
+      .catch(err =>{
+        setLoading(false);
+        console.log(err);
+      });
   };
 
   const PostData = () => {
@@ -72,6 +79,7 @@ function EditProfile() {
     data.append("file", image);
     data.append("upload_preset", "insta-clone");
     data.append("cloud_name", "bbs779");
+    setLoading(true);
     fetch("https://api.cloudinary.com/v1_1/bbs779/image/upload", {
       method: "post",
       body: data
@@ -80,12 +88,16 @@ function EditProfile() {
       .then(data => {
         setUrl(data.url);
       })
-      .catch(() => M.toast({ html: "Pic upload failed", classes: "#e53935 red darken-1" }));
+      .catch(() => {
+        setLoading(false);
+        M.toast({ html: "Pic upload failed", classes: "#e53935 red darken-1" });
+      });
   };
 
   return (
     <>
-        { state ?
+        { loading ? 
+        <Loading /> : state ?
         <div className="my-card">
         <div className="card auth-card input-field">
           <h2 className="brand-logo">Edit Profile</h2>
@@ -125,11 +137,7 @@ function EditProfile() {
           </button>
         </div>
         </div>
-        : (
-          <center>
-            <h2>loading...</h2>
-          </center>
-        )
+        : <Loading />
       }
         </>
   );

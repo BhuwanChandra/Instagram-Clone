@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Post from "./Partials/Post";
 import { UserContext } from "../App";
+import Loading from "./Partials/Loading";
 
 function Explore() {
   const { state } = useContext(UserContext);
@@ -154,11 +155,8 @@ function Explore() {
             />
           ))}
         </div>
-      ) : (
-        <center>
-          <h2>loading...</h2>
-        </center>
-      )}
+      ) : <Loading />
+      }
     </>
   );
 }

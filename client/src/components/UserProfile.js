@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "../App.css";
 import { UserContext } from "../App";
 import { useParams } from "react-router-dom";
+import Loading from "./Partials/Loading";
 
 function UserProfile() {
   const { state, dispatch } = useContext(UserContext);
@@ -81,15 +82,21 @@ function UserProfile() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-evenly",
               margin: "18px 0px",
             }}
           >
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
               <img
-                style={{ width: "160px", height: "160px", borderRadius: "50%" }}
+                className="profile-image"
                 src={userProfile.user.pic}
+                alt={userProfile.user.name}
               />
+              {
+                userProfile.user.followers.includes(state._id) ?
+                <button className="btn btn-small #42a5f5 blue darken-1 p-btn" onClick={unfollowUser}> Unfollow </button>
+                : <button className="btn btn-small #42a5f5 blue darken-1 p-btn" onClick={followUser}> follow </button>
+              }
             </div>
             <div>
               <h4>{userProfile.user.name}</h4>
@@ -105,11 +112,7 @@ function UserProfile() {
                 <h6> {userProfile.user.followers.length} followers</h6>
                 <h6> {userProfile.user.following.length} following</h6>
               </div>
-              {
-                userProfile.user.followers.includes(state._id) ?
-                <button className="btn" onClick={unfollowUser}> Unfollow </button>
-                : <button className="btn" onClick={followUser}> follow </button>
-              }
+              
             </div>
           </div>
           <div className="gallery">
@@ -124,11 +127,8 @@ function UserProfile() {
             ))}
           </div>
         </div>
-      ) : (
-        <center>
-          <h2>loading...</h2>
-        </center>
-      )}
+      ) : <Loading />
+      }
     </>
   );
 }
