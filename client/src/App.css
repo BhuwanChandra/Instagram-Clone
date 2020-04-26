@@ -88,6 +88,36 @@ nav ul a {
     left: auto !important;
 }
 
+.post-head {
+    display: flex;
+    height: 65px;
+    padding-left: '10px';
+    align-items: center;
+    align-content: center;
+    margin: 0;
+}
+
+.post-head > a {
+    font-size: 2.2rem !important;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+.post-img {
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+    margin-right: 10px;
+    border-radius: 50%;
+    border: 3px solid #1183ee;
+}
+
 i {
     cursor: pointer;
 }

@@ -16,30 +16,38 @@ function Post({ props }) {
 
   return (
     <div className="card home-card">
-      <h5>
-        <Link
-          to={
-            item.postedBy._id !== state._id
-              ? `/profile/${item.postedBy._id}`
-              : `/profile`
-          }
-        >
-          {item.postedBy.name}
-        </Link>
-        {item.postedBy._id === state._id ? (
-          <i
-            onClick={() => deletePost(item._id)}
-            style={{ color: "#e53935", float: "right" }}
-            className="material-icons"
+      <div className="post-header">
+        <p className="post-head">
+          <img
+            className="post-img"
+            src={item.postedBy.pic}
+            alt={item.postedBy.name}
+          />
+          <Link
+            to={
+              item.postedBy._id !== state._id
+                ? `/profile/${item.postedBy._id}`
+                : `/profile`
+            }
           >
-            delete
-          </i>
-        ) : (
-          ""
-        )}
-      </h5>
+            {item.postedBy.name}
+          </Link>
+        </p>
+          {item.postedBy._id === state._id ? (
+            <i
+              onClick={() => deletePost(item._id)}
+              style={{ color: "#e53935"}}
+              className="material-icons"
+            >
+              delete
+            </i>
+          ) : (
+            ""
+          )}
+      </div>
+      
       <div className="card-image">
-        <img src={item.photo} alt={item.title} />
+        <img src={item.photo} onDoubleClick={() => {return item.likes.includes(state._id)?'':likePost(item._id);}} alt={item.title} />
       </div>
       <div className="card-content">
         {item.likes.includes(state._id) ? (
