@@ -82,6 +82,11 @@ nav ul a {
     height: max-content;
 }
 
+.profile-card {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
 #toast-container {
     top: 70px !important;
     right: 20px !important;
@@ -154,6 +159,16 @@ i {
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
+    .gallery {
+        width: 100%;
+        display: grid;
+        grid-column-gap: 4px;
+        grid-row-gap: 4px;
+        grid-template-columns: 33% 33% 33%;
+        padding: 2px;
+        padding-top: 5px;
+        border-top: 1px solid grey;
+    }
     .profile-image {
         width: 100px;
         height: 100px;

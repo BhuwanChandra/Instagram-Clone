@@ -90,7 +90,7 @@ function UserProfile() {
   return (
     <>
       {userProfile.user && userProfile.posts ? (
-        <div style={{ maxWidth: "600px", margin: "0px auto" }}>
+        <div className="profile-card">
           <div
             style={{
               display: "flex",

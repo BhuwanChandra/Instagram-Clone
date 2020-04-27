@@ -1,33 +1,37 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../App";
-import M from 'materialize-css';
+import M from "materialize-css";
 import Loading from "./Partials/Loading";
 
 function EditProfile() {
   const { state, dispatch } = useContext(UserContext);
 
   const history = useHistory();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [image, setImage] = useState(undefined);
-    const [url, setUrl] = useState(undefined);
-    const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState(undefined);
+  const [url, setUrl] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-      if(state){
-        setName(state.name);
-        setEmail(state.email);
-      }
-    },[state])
-    useEffect(() => {
-      if(url){
-        uploadFields();
-      }
-    },[url])
+  useEffect(() => {
+    if (state) {
+      setName(state.name);
+      setEmail(state.email);
+    }
+  }, [state]);
+  useEffect(() => {
+    if (url) {
+      uploadFields();
+    }
+  }, [url]);
 
   const uploadFields = () => {
-    if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
       M.toast({ html: "Invalid Email", classes: "#e53935 red darken-1" });
       return;
     }
@@ -63,14 +67,14 @@ function EditProfile() {
           history.push("/profile");
         }
       })
-      .catch(err =>{
+      .catch(err => {
         setLoading(false);
         console.log(err);
       });
   };
 
   const PostData = () => {
-    if(image) uploadPic();
+    if (image) uploadPic();
     else uploadFields();
   };
 
@@ -96,50 +100,55 @@ function EditProfile() {
 
   return (
     <>
-        { loading ? 
-        <Loading /> : state ?
+      {loading ? (
+        <Loading />
+      ) : state ? (
         <div className="my-card">
-        <div className="card auth-card input-field">
-          <h2 className="brand-logo">Edit Profile</h2>
-          <input
-            value={state ? name : ''}
-            type="text"
-            placeholder="name"
-            onChange={e => setName(e.target.value)}
-          />
-          <input
-            value={state ? email : ''}
-            type="email"
-            placeholder="email"
-            onChange={e => setEmail(e.target.value)}
-          />
-          <div className="card-image" style={{marginTop: "15px"}}>
-              <img src={image ? URL.createObjectURL(image): state.pic} alt="image preview" />
-          </div>
-          <div className="file-field input-field">
-            <div className="btn #42a5f5 blue darken-1">
-              <span>Upload pic</span>
-              <input type="file" onChange={e => setImage(e.target.files[0])} />
-            </div>
-            <div className="file-path-wrapper">
-              <input
-                className="file-path validate"
-                type="text"
-                placeholder="upload pic to change..."
+          <div className="card auth-card input-field">
+            <h2 className="brand-logo">Edit Profile</h2>
+            <input
+              value={state ? name : ""}
+              type="text"
+              placeholder="name"
+              onChange={e => setName(e.target.value)}
+            />
+            <input
+              value={state ? email : ""}
+              type="email"
+              placeholder="email"
+              onChange={e => setEmail(e.target.value)}
+            />
+            <div className="card-image" style={{ marginTop: "15px" }}>
+              <img
+                src={image ? URL.createObjectURL(image) : state.pic}
+                alt="image preview"
               />
             </div>
+            <div className="file-field input-field">
+              <div className="btn #42a5f5 blue darken-1">
+                <span>Upload pic</span>
+                <input
+                  type="file"
+                  onChange={e => setImage(e.target.files[0])}
+                />
+              </div>
+              <div className="file-path-wrapper">
+                <input
+                  className="file-path validate"
+                  type="text"
+                  placeholder="upload pic to change..."
+                />
+              </div>
+            </div>
+            <button className="btn #42a5f5 blue darken-1" onClick={PostData}>
+              Save
+            </button>
           </div>
-          <button
-            className="btn #42a5f5 blue darken-1"
-            onClick={PostData}
-          >
-            Save
-          </button>
         </div>
-        </div>
-        : <Loading />
-      }
-        </>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 

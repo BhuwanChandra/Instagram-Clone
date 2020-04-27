@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../App.css";
 import { UserContext } from "../App";
 import Loading from "./Partials/Loading";
@@ -25,7 +25,7 @@ function Profile() {
   return (
     <>
       {!loading ? (
-        <div style={{ maxWidth: "600px", margin: "0px auto" }}>
+        <div className="profile-card">
           <div
             style={{
               display: "flex",
@@ -33,7 +33,7 @@ function Profile() {
               margin: "18px 0px"
             }}
           >
-            <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <img
                 className="profile-image"
                 src={state ? state.pic : ""}
@@ -43,7 +43,9 @@ function Profile() {
               <Link
                 to="/profile/edit"
                 className="btn btn-small #42a5f5 blue darken-1 p-btn"
-              >Edit Profile</Link>
+              >
+                Edit Profile
+              </Link>
             </div>
             <div className="info-sec">
               <h4>{state ? state.name : ""}</h4>
@@ -62,7 +64,8 @@ function Profile() {
             </div>
           </div>
           <div className="posts-sec-head">
-            <i class="material-icons">apps</i><span>POSTS</span>
+            <i class="material-icons">apps</i>
+            <span>POSTS</span>
           </div>
           <div className="gallery">
             {mypics.map(item => (
@@ -76,8 +79,9 @@ function Profile() {
             ))}
           </div>
         </div>
-      ) : <Loading />
-      }
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }
