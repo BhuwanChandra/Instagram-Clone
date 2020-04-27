@@ -44,10 +44,10 @@ const sendWelcomeMail = (user) => {
 const sendResetMail = (user, token) => {
     let mailTemplate = `
     <p>
-    <br/>
-    <h4>You requested to reset password!</h4><br/>
-    <h5>click on this <a href="${HOST}reset/${token}">link</a> to reset your password!</h5><br/>
-    <h4>This link is only valid for one hour.</h4><br/>
+    <h1>You requested to reset your password!</h1>
+    <h3>click on this <a href="${HOST}reset/${token}">link</a> to reset your password!</h3>
+    <h3>This link is only valid for one hour.</h3>
+    <h4>If you did not requested for reset password, you can ignore this email.</h4>
     </p>
     `;
 
@@ -158,6 +158,28 @@ router.post('/reset-password', (req, res) => {
         res.json({message: "check your email to reset your password!"});
       })
     })
+  })
+})
+
+router.post('/new-password', (req, res) => {
+  const newPassword = req.body.password;
+  const token = req.body.token;
+  User.findOne({resetToken: token, expireToken: {$gt: Date.now()}})
+  .then(user => {
+    if(!user){
+      return res.status(422).json({error: 'Try again, session expired!'})
+    }
+    bcrypt.hash(newPassword, 12).then(hashPassword => {
+      user.password = hashPassword;
+      user.resetToken = undefined;
+      user.expireToken = undefined;
+      user.save().then(result => {
+        res.json({message: "password updated successfully!"})
+      });
+    })
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({error: "Try again, session expired!"})
   })
 })
 

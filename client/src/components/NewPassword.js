@@ -1,30 +1,30 @@
-import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import M from 'materialize-css';
-import { UserContext } from '../App';
 import Loading from "./Partials/Loading";
 
-function Login() {
+function NewPassword() {
   const history = useHistory();
-  const { dispatch } = useContext(UserContext);
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [confPassword, setConfPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { token } = useParams();
+   console.log(token);
+    
   const PostData = () => {
-    if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
-      M.toast({ html: "Invalid Email", classes: '#e53935 red darken-1' });
-      return;
+    if(password !== confPassword){
+        M.toast({ html: "confirm password doesn't match", classes: '#e53935 red darken-1' })
+        return null;
     }
     setLoading(true);
-    fetch("/signin", {
+    fetch("/new-password", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        email,
-        password
+        password,
+        token
       })
     })
       .then(res => res.json())
@@ -34,11 +34,8 @@ function Login() {
         if (data.error)
           M.toast({ html: data.error, classes: '#e53935 red darken-1' })
         else{
-          localStorage.setItem("jwt", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user))
-          dispatch({type: "USER", payload: data.user});
           M.toast({ html: data.message, classes: "#43a047 green darken-1" });
-          history.push('/')
+          history.push('/login')
         }
       })
       .catch(err => {
@@ -53,32 +50,25 @@ function Login() {
         <div className="card auth-card input-field">
           <h2 className="brand-logo">Instagram</h2>
           <input
-            value={email}
-            type="email"
-            placeholder="email"
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input
             value={password}
             type="password"
-            placeholder="password"
+            placeholder="enter new password"
             onChange={e => setPassword(e.target.value)}
           />
-          <div style={{marginBottom: '2rem'}}>
-            <Link style={{float: 'right',margin: 0}} to="/reset">forgot password?</Link>
-          </div>
+          <input
+            value={confPassword}
+            type="password"
+            placeholder="confirm new password"
+            onChange={e => setConfPassword(e.target.value)}
+          />
           <button
             className="btn #42a5f5 blue darken-1"
             type="submit"
             name="action"
             onClick={PostData}
           >
-            Login
+            Set Password
           </button>
-          <h6>
-            Don't have an account?
-            <Link to="/signup"> signup</Link>
-          </h6>
         </div>
       </div>
     }
@@ -86,4 +76,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default NewPassword;

@@ -11,6 +11,8 @@ import UserProfile from './components/UserProfile';
 import CreatePost from './components/CreatePost';
 import Explore from './components/Explore';
 import EditProfile from './components/EditProfile';
+import Reset from './components/Reset';
+import NewPassword from './components/NewPassword';
 
 export const UserContext = createContext();
 
@@ -22,8 +24,10 @@ const Routing = () => {
     if(user){
       dispatch({type: "USER", payload: user});
     }
-    else
+    else{
+      if(!history.location.pathname.startsWith('/reset'))
       history.push('/login');
+    }
   }, []);
   return (
     <Switch>
@@ -50,6 +54,12 @@ const Routing = () => {
       </Route>
       <Route path="/explore">
         <Explore />
+      </Route>
+      <Route exact path="/reset">
+        <Reset />
+      </Route>
+      <Route path="/reset/:token">
+        <NewPassword />
       </Route>
     </Switch>
   );
