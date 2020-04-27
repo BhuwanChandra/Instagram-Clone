@@ -19,6 +19,14 @@ const userSchema = new mongoose.Schema({
     default:
       "https://res.cloudinary.com/bbs779/image/upload/v1587651949/img_cwclog.png"
   },
+  resetToken: {
+    type: String,
+    required: false
+  },
+  expireToken: {
+    type: Date,
+    required: false
+  },
   followers: [
     {
       type: ObjectId,
