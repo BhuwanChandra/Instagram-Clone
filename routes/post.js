@@ -9,6 +9,7 @@ router.get("/allpost", requireLogin, (req, res) => {
   Post.find()
     .populate("postedBy", "_id name pic")
     .populate("comments.postedBy", "_id name")
+    .sort('-createdAt')
     .then(posts => {
       res.json({ posts });
     })
@@ -17,13 +18,13 @@ router.get("/allpost", requireLogin, (req, res) => {
 
 
 router.get("/getsubpost", requireLogin, (req, res) => {
-  Post.find({postedBy: {$in: req.user.following}})
+  Post.find({ postedBy: { $in: req.user.following } })
     .populate("postedBy", "_id name pic")
     .populate("comments.postedBy", "_id name")
+    .sort("-createdAt")
     .then(posts => {
-      if(posts)
-      res.status(200).json({ posts });
-      else res.json({message: "No posts available"})
+      if (posts) res.status(200).json({ posts });
+      else res.json({ message: "No posts available" });
     })
     .catch(err => console.log(err));
 });
