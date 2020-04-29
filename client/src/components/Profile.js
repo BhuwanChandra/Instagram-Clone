@@ -64,7 +64,7 @@ function Profile() {
             </div>
           </div>
           <div className="posts-sec-head">
-            <i class="material-icons">apps</i>
+            <i className="material-icons">apps</i>
             <span>POSTS</span>
           </div>
           <div className="gallery">

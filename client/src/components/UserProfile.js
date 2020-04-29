@@ -9,7 +9,8 @@ function UserProfile() {
   const [userProfile, setProfile] = useState([]);
   const { userId } = useParams();
 
-  useEffect(() => {
+  const fetchUser = () => {
+    setProfile([]);
     fetch(`/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt")
@@ -21,7 +22,15 @@ function UserProfile() {
         setProfile(res);
       })
       .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchUser();
   }, []);
+
+  useEffect(() => {
+    fetchUser();
+  }, [userId]);
 
   const followUser = () => {
     fetch("/follow", {
@@ -139,7 +148,7 @@ function UserProfile() {
             </div>
           </div>
           <div className="posts-sec-head">
-            <i class="material-icons">apps</i>
+            <i className="material-icons">apps</i>
             <span>POSTS</span>
           </div>
           <div className="gallery">

@@ -17,7 +17,34 @@ nav ul a {
     margin-right: 10px;
 }
 
-.sidenav li button {
+nav ul i {
+    font-size: 2rem !important;
+    color: #000000;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+.sidenav > li > i {
+    font-size: 2rem !important;
+    color: #000000;
+    padding-left: 2rem;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.avatar > a {
+    color: #000000 !important;
+}
+
+.avatar .title {
+    font-size: 1.5rem !important;
+}
+
+.collection .collection-item.avatar {
+    min-height: 60px;
+}
+
+.sidenav li button{
     margin-left: 2rem;
 }
 
