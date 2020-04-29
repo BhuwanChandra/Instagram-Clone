@@ -50,16 +50,10 @@ function Profile() {
             <div className="info-sec">
               <h4>{state ? state.name : ""}</h4>
               <h5>{state ? state.email : ""}</h5>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  width: "108%"
-                }}
-              >
-                <h6>{mypics.length} posts</h6>
-                <h6>{state ? state.followers.length : 0} followers</h6>
-                <h6>{state ? state.following.length : 0} following</h6>
+              <div className="public-info">
+                <h6>{`${mypics.length} posts`}</h6>
+                <h6>{state ? `${state.followers.length} followers` : 0}</h6>
+                <h6>{state ? `${state.following.length} following` : 0}</h6>
               </div>
             </div>
           </div>

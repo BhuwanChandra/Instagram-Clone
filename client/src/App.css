@@ -173,6 +173,12 @@ i {
     padding-top: 20px;
 }
 
+.public-info {
+    display: flex;
+    justify-content: space-between;
+    width: 110%;
+}
+
 .posts-sec-head {
     border-top: 1px solid #686767;
     padding: 5px 0;
@@ -205,5 +211,9 @@ i {
     }
     .info-sec {
         padding-top: 0;
+    }
+    .public-info {
+        justify-content: space-evenly;
+        width: 108%;
     }
 }

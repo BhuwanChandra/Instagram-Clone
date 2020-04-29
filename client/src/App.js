@@ -23,6 +23,16 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if(user){
       dispatch({type: "USER", payload: user});
+      fetch("/user", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("jwt")
+        }
+      })
+        .then(res => res.json())
+        .then(res => {
+          dispatch({type: "USER", payload: res});
+        })
+        .catch(err => console.log(err));
     }
     else{
       if(!history.location.pathname.startsWith('/reset'))

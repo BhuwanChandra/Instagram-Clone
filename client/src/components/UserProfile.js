@@ -118,32 +118,24 @@ function UserProfile() {
                   className="btn btn-small #42a5f5 blue darken-1 p-btn"
                   onClick={unfollowUser}
                 >
-                  {" "}
-                  Unfollow{" "}
+                  Unfollow
                 </button>
               ) : (
                 <button
                   className="btn btn-small #42a5f5 blue darken-1 p-btn"
                   onClick={followUser}
                 >
-                  {" "}
-                  follow{" "}
+                  follow
                 </button>
               )}
             </div>
             <div className="info-sec">
               <h4>{userProfile.user.name}</h4>
               <h5>{userProfile.user.email}</h5>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  width: "108%"
-                }}
-              >
-                <h6>{userProfile.posts.length} posts</h6>
-                <h6> {userProfile.user.followers.length} followers</h6>
-                <h6> {userProfile.user.following.length} following</h6>
+              <div className="public-info">
+                <h6>{`${userProfile.posts.length} posts`}</h6>
+                <h6> {`${userProfile.user.followers.length} followers`}</h6>
+                <h6> {`${userProfile.user.following.length} following`}</h6>
               </div>
             </div>
           </div>

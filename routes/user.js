@@ -5,6 +5,18 @@ const requireLogin = require("../middleware/requireLogin");
 const User = mongoose.model("User");
 const Post = mongoose.model("Post");
 
+router.get("/user", requireLogin, (req, res) => {
+  User.findOne({ _id: req.user._id })
+    .select("-password")
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(500);
+    });
+});
+
 router.get("/user/:id", requireLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
     .select("-password")
@@ -98,7 +110,7 @@ router.post("/editprofile", requireLogin, (req, res) => {
   }).catch(err => res.status(422).json({error: err}));
 });
 
-router.post('/search-users',(req, res) => {
+router.post('/search-users', requireLogin,(req, res) => {
   let emailPattern = new RegExp(`^${req.body.query}`);
   let namePattern = new RegExp(`${req.body.query}`, 'i');
   User.find({$or: [{email: {$regex: emailPattern}},{name: {$regex: namePattern}}]})
