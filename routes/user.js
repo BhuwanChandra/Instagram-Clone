@@ -98,4 +98,15 @@ router.post("/editprofile", requireLogin, (req, res) => {
   }).catch(err => res.status(422).json({error: err}));
 });
 
+router.post('/search-users',(req, res) => {
+  let emailPattern = new RegExp(`^${req.body.query}`);
+  let namePattern = new RegExp(`${req.body.query}`, 'i');
+  User.find({$or: [{email: {$regex: emailPattern}},{name: {$regex: namePattern}}]})
+  .select("-password -following -resetToken -expireToken")
+  .then(users => {
+    res.json({users});
+  })
+  .catch(err => console.log(err));
+})
+
 module.exports = router;

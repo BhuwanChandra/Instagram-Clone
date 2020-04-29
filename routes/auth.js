@@ -5,7 +5,7 @@ const User = mongoose.model("User");
 const bcrypt = require("bcryptjs");
 const crypto = require('crypto');
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET, MAIL_PASS, HOST } = require("../config/keys");
+const { JWT_SECRET, MAIL_PASS, HOST, EMAIL } = require("../config/keys");
 const nodeMailer = require("nodemailer");
 
 let transporter = nodeMailer.createTransport({
@@ -53,7 +53,7 @@ const sendResetMail = (user, token) => {
 
     // setup email data with unicode symbols
     let mailOptions = {
-      from: "bbs7779@bhuwan.codes",
+      from: EMAIL,
       to: `${user.email}`,
       // ze3zt.bbs@inbox.testmail.app`,
       subject: "Password Reset",
