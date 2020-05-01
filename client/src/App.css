@@ -1,219 +1,231 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap");
 
 .nav-wrapper a {
-    color: #000000 !important;
+  color: #000000 !important;
 }
 
 nav ul a,
 nav ul button {
-    font-size: 1.5rem;
-    margin-right: 15px;
+  font-size: 1.5rem;
+  margin-right: 15px;
 }
 
 nav ul a {
-    padding: 0 10px !important;
-    margin-right: 10px;
+  padding: 0 10px !important;
+  margin-right: 10px;
 }
 
 nav ul i {
-    font-size: 2rem !important;
-    color: #000000;
-    margin-right: 15px;
-    vertical-align: middle;
+  font-size: 2rem !important;
+  color: #000000;
+  margin-right: 15px;
+  vertical-align: middle;
 }
 
 .sidenav > li > i {
-    font-size: 2rem !important;
-    color: #000000;
-    padding-left: 2rem;
-    vertical-align: middle;
-    width: 100%;
+  font-size: 2rem !important;
+  color: #000000;
+  padding-left: 2rem;
+  vertical-align: middle;
+  width: 100%;
 }
 
 .avatar > a {
-    color: #000000 !important;
+  color: #000000 !important;
 }
 
 .avatar .title {
-    font-size: 1.5rem !important;
+  font-size: 1.5rem !important;
 }
 
 .collection .collection-item.avatar {
-    min-height: 60px;
+  min-height: 60px;
 }
 
-.sidenav li button{
-    margin-left: 2rem;
+.sidenav li button {
+  margin-left: 2rem;
 }
 
 .brand-logo {
-    font-family: 'Grand Hotel', cursive;
-    margin-left: 30px;
-    font-size: 3rem !important;
+  font-family: "Grand Hotel", cursive;
+  margin-left: 30px;
+  font-size: 3rem !important;
 }
 
-.my-card{
-    margin-top: 30px;
+.my-card {
+  margin-top: 30px;
 }
 
 .my-card .card-image img {
-    max-height: 250px;
-    max-width: 250px;
-    margin: auto;
-    border-radius: 50%;
+  max-height: 250px;
+  max-width: 250px;
+  margin: auto;
+  border-radius: 50%;
 }
 
 .create-post .card-image img {
-    max-height: 400px;
-    max-width: 400px;
-    margin: auto;
+  max-height: 400px;
+  max-width: 400px;
+  margin: auto;
 }
 
 .auth-card {
-    padding: 20px;
-    text-align: center;
-    max-width: 400px;
-    margin: 15px auto;
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+  margin: 15px auto;
 }
 
 .input-field input:focus {
-    border-bottom: 1px solid #2990f1 !important;
-    box-shadow: 0 1px 0 0 #2990f1 !important;
+  border-bottom: 1px solid #2990f1 !important;
+  box-shadow: 0 1px 0 0 #2990f1 !important;
 }
 
 .gallery {
-    width: 100%;
-    display: grid;
-    grid-column-gap: 12px;
-    grid-row-gap: 12px;
-    grid-template-columns: 33% 33% 33%;
-    padding: 5px;
-    padding-top: 10px;
-    border-top: 1px solid grey;
+  width: 100%;
+  display: grid;
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  grid-template-columns: 33% 33% 33%;
+  padding: 5px;
+  padding-top: 10px;
+  border-top: 1px solid grey;
 }
 
 .gallery-item {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .img-item {
-    background-color: #b4cace;
+  background-color: #b4cace;
 }
 
 .home-card {
-    max-width: 550px;
-    margin: 15px auto;
-    height: max-content;
+  max-width: 550px;
+  margin: 15px auto;
+  height: max-content;
 }
 
 .profile-card {
-    max-width: 650px;
-    margin: 0 auto;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
 #toast-container {
-    top: 70px !important;
-    right: 20px !important;
-    left: auto !important;
+  top: 70px !important;
+  right: 20px !important;
+  left: auto !important;
 }
 
 .post-head {
-    display: flex;
-    height: 65px;
-    padding-left: '10px';
-    align-items: center;
-    align-content: center;
-    margin: 0;
+  display: flex;
+  height: 65px;
+  padding-left: "10px";
+  align-items: center;
+  align-content: center;
+  margin: 0;
 }
 
 .post-head > a {
-    font-size: 2.2rem !important;
+  font-size: 2.2rem !important;
 }
 
 .post-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 5px;
-    padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 10px;
 }
 
 .post-img {
-    height: 50px;
-    width: 50px;
-    margin: 5px;
-    margin-right: 10px;
-    border-radius: 50%;
-    border: 3px solid #1183ee;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 3px solid #1183ee;
 }
 
 .loader-container {
-    height: 80vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 i {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile-image {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .info-sec {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .public-info {
-    display: flex;
-    justify-content: space-between;
-    width: 110%;
+  display: flex;
+  justify-content: space-between;
+  width: 110%;
 }
 
 .posts-sec-head {
-    border-top: 1px solid #686767;
-    padding: 5px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #686767;
+  border-top: 1px solid #686767;
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #686767;
 }
 
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
-    .gallery {
-        width: 100%;
-        display: grid;
-        grid-column-gap: 4px;
-        grid-row-gap: 4px;
-        grid-template-columns: 33% 33% 33%;
-        padding: 2px;
-        padding-top: 5px;
-        border-top: 1px solid grey;
-    }
-    .profile-image {
-        width: 100px;
-        height: 100px;
-    }
-    .p-btn {
-        padding: 0 !important;
-    }
-    .info-sec {
-        padding-top: 0;
-    }
-    .public-info {
-        justify-content: space-evenly;
-        width: 108%;
-    }
+  .gallery {
+    width: 100%;
+    display: grid;
+    grid-column-gap: 4px;
+    grid-row-gap: 4px;
+    grid-template-columns: 33% 33% 33%;
+    padding: 2px;
+    padding-top: 5px;
+    border-top: 1px solid grey;
+  }
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+  .p-btn {
+    padding: 0 !important;
+  }
+  .info-sec {
+    padding-top: 0;
+  }
+  .public-info {
+    justify-content: space-evenly;
+    width: 108%;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .modal {
+    width: 90% !important;
+  }
+  .modal .modal-content {
+    padding: 12px;
+    padding-bottom: 5px;
+  }
+  .input-field {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }

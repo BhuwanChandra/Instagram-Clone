@@ -111,7 +111,7 @@ router.post("/editprofile", requireLogin, (req, res) => {
 });
 
 router.post('/search-users', requireLogin,(req, res) => {
-  let emailPattern = new RegExp(`^${req.body.query}`);
+  let emailPattern = new RegExp(`^${req.body.query}`, 'i');
   let namePattern = new RegExp(`${req.body.query}`, 'i');
   User.find({$or: [{email: {$regex: emailPattern}},{name: {$regex: namePattern}}]})
   .select("-password -following -resetToken -expireToken")
