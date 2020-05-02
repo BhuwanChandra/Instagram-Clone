@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from 'react-router-dom';
 import { UserContext } from "../App";
 import Post from "./Partials/Post";
 import Loading from "./Partials/Loading";
@@ -142,6 +143,12 @@ function Home() {
   return (
     <>
       {!loading ? (
+        state.following.length === 0 ?
+          <div style={{textAlign: 'center'}} className="card no-post">
+            <h4>You haven't followed anyone yet.</h4>
+            <h6 style={{paddingBottom: "10px"}}>you can explore other users post.</h6>
+            <Link to="/explore" className="btn #42a5f5 blue darken-1">Explore</Link>
+          </div> :
         <div className="home">
           {data.map(item => (
             <Post
