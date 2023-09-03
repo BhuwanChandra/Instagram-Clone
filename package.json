@@ -18,6 +18,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.20",
-    "nodemailer": "^6.4.16"
+    "nodemailer": "^6.6.1"
   }
 }
